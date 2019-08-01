@@ -40,8 +40,10 @@ function isEmpty(obj) {
 }
 
 // create a file/dir
+// BROKEN
 function create(path) {
   const pathA = pathSplit(path);
+
   for (let i = 0 ; i < pathA.length ; i++) {
     console.log("> create > start");
     // need to append on the path.
@@ -55,7 +57,7 @@ function create(path) {
     console.log(curDir);
 
     // check if the key exist.
-    // Unsure on how to refernce a nested property.
+    // Maybe DFS?
     if (curDir) {
       console.log("nested");
       curDir[curPath] = {};
@@ -63,6 +65,18 @@ function create(path) {
       ds[curPath] = {};
     }
   }
+}
+
+// stuck on how to reference a nested object property
+// BROKEN
+function createDFS(pathA) {
+  // base case
+  if (isEmpty(pathA)) {
+    return {};
+  }
+
+  const curPath = pathA.shift();
+  ds[curPath] = pathA(pathA);
 }
 
 // delete a file/dir
@@ -99,6 +113,8 @@ function listDFS(obj, indent = 0) {
   };
 }
 
+// MAIN
+// ===========================================================================
 // process each command
 //
 // for (let i = 0 ; i < cmds.length ; i++) {
@@ -127,4 +143,4 @@ function listDFS(obj, indent = 0) {
 //     "baz": {}
 //   }
 // }
-list();
+//list();
